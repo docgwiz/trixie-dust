@@ -1,0 +1,4 @@
+### Output configuration
+output eDP-1 mode 2880x1800@59.990Hz scale 2
+
+# Run swaymsg -t get_outputs for output deets
