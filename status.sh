@@ -1,5 +1,3 @@
-# ~/.config/sway/status.sh
-
 # status bar config file for sway
 
 # get date
@@ -7,8 +5,6 @@
 day_formatted=$(date "+%a")
 date_formatted=$(date "+%d-%b-%Y") 
 time_formatted=$(date "+%H:%M")
-
-#audio_level=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '[0-9]{1,3}(?=%|\s)' | head -n1)
 
 # get audio_level
 # =$(pactl get-sink-volume @DEFAULT_SINK@)
@@ -30,4 +26,7 @@ linux_info=$(uname -r | cut -d '-' -f1)
 # get the current username
 USERNAME=$(whoami)
 
-echo $USERNAME "  battery" $battery_info " " $mute_status " A" $audio_level"%  | " $day_formatted $date_formatted " " $time_formatted "  "
+
+$iconx="\uF0E7"
+
+echo $USERNAME "|" "Battery" $battery_info "V__%" $mute_status $iconx "A"$audio_level"% |" $day_formatted $date_formatted  $time_formatted " "

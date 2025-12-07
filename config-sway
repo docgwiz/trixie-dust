@@ -123,13 +123,17 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
 
 
 ###
-### KEYBINDS: launch and close shortcuts
+### KEYBINDS: launch and close apps
 ###
-# This config schema uses 
-# the $mod/logo key for launching apps
+# This config scheme uses the $mod/logo key for launching apps
 # the $super/alt/option key for "dangerous" actions like kill or reload
 # $super+Shift for utility functions and apps
 #
+
+###
+### KEYBINDS: close windows / close sway
+###
+
     # Exit sway (logs you out of your Wayland session)
     bindsym $super+q exit
     # bindsym $mod+m exec swaynag -t warning -m 'Exit sway? (This will end your Wayland session.) ' -B 'Yes, exit sway' 'swaymsg exit'
@@ -140,6 +144,11 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
  
     # Reload the configuration file
     bindsym $super+Shift+r reload
+		bindsym $super+c reload
+
+###
+### KEYBINDS: launch apps
+###
 
     # Start  terminal
     bindsym $mod+Return exec $term
@@ -165,20 +174,6 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
 		# launch Obsidian AppImage via script file in /usr/local/bin)
     bindsym $mod+Shift+o exec obsidian.sh
 
-		# LEGACY: launch Obsidian installed snap package (may not be installed)
-    bindsym $super+o exec $notemngr
-
-
-#
-# Resize windows:
-#
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
 ###
 ### KEYBINDS: switch focus
 ###
@@ -199,6 +194,10 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
 		bindsym $super+$right workspace next_on_output
 		bindsym $super+Left workspace prev_on_output
 		bindsym $super+Right workspace next_on_output
+		bindsym $super+$up workspace prev_on_output
+		bindsym $super+$down workspace next_on_output
+		bindsym $super+Up workspace prev_on_output
+		bindsym $super+Down workspace next_on_output
 
     # Switch to workspace
     bindsym $super+1 workspace number 1
@@ -231,22 +230,26 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
 ###
 ### KEYBINDS: layout and focus:
 ### 
-    # horizontal split (y-axis)
-    bindsym $super+Shift+h splith 
+    # NOT WORKING
+		# horizontal split (x-axis)
+    # bindsym $super+x split horizontal 
 
-		# vertical split (x-axis)
-    bindsym $super+Shift+v splitv
+		# NOT WORKING
+		# vertical split (y-axis)
+    # bindsym $super+y split vertical
 
 		# toggle between horizontal and vertical split
-    bindsym $super+Shift+slash layout toggle split
+    # also used to return to split layout mode
+    bindsym $super+slash layout toggle split
 
+    # Switch the layout mode to stacking layout mode
+    bindsym $super+s layout stacking 
 
-    # Switch the current container between different layout styles
-    bindsym $super+Shift+s layout stacking
-    bindsym $super+Shift+t layout tabbed
+    # Switch the layout mode to tabbed layout mode
+    bindsym $super+t layout tabbed
 
     # Toggle the current focus between fullscreen and tiling mode
-    bindsym $super+Shift+Return fullscreen toggle
+    bindsym $super+Return fullscreen toggle
 
     # Toggle the current focus between floating and tiling mode
     bindsym $super+space floating toggle
@@ -271,6 +274,16 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $super+minus scratchpad show
 
+
+###
+### KEYBINDS: drag container with mouse
+###
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
 
 ###
 ### KEYBINDS: resize containers
@@ -374,7 +387,7 @@ bar {
  
     status_command while ~/.config/sway/status.sh; do sleep 1; done
     
-    font pango:DejaVu
+    font pango:DejaVu Sans Mono 10
 
     colors {
         # text color of status bar
