@@ -1,11 +1,19 @@
 # ~/.config/sway/outputs
 
-### output configuration for iMac-9-1
+# run swaymsg -t get_outputs for output deets
+# consider using kanshi to handle different outputs
+
+### output config for MacBookPro--10-1
+output eDP-1 mode 2880x1800@59.990Hz scale 2
+
+### output config for iMac-9-1
 #output LVDS-1 mode 1920x1200@60.241Hz scale 1
 
 ### output config for Geekom
-output HDMI-A-1 mode 1920x1080@60.000HZ scale 1
+#output HDMI-A-1 mode 1920x1080@60.000HZ scale 1
 
+# set background color
+output * bg #79baec solid_color
 
 ### shades of blue
 # https://www.pinterest.com/pin/75-shades-of-blue-blue-hex-codes-color-names-included--75153887526405408/
@@ -31,8 +39,4 @@ output HDMI-A-1 mode 1920x1080@60.000HZ scale 1
 #36454f charcoal blue
 #566d7e marble blue
 
-# set background color
-# output * bg #6495ed solid_color
-output * bg #79baec solid_color
 
-# run swaymsg -t get_outputs for output deets
