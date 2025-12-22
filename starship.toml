@@ -1,0 +1,41 @@
+# ~/.config/starship.toml
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """\n\n$hostname$localip$username\n\n$directory$character"""
+# format = "$all"
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+[localip]
+ssh_only = false
+style = "inverted purple"
+format = "[:$localipv4 ]($style)"
+disabled = false
+
+[hostname]
+ssh_only = false
+style = "inverted purple"
+format = "[ $hostname]($style)"
+disabled = false
+
+[username]
+show_always = true
+style_user = "fg:#ffffff bg:#6495ed" # cornflower blue bg
+style_root = "fg:ffffff bg:#151b54" # night blue bg
+# style_user = "bold bright-cyan"
+# style_root = "bold white"
+format = "[ $user ]($style)"
+disabled = false
+
+[directory]
+style = "bold bright-green"
+format = "[ $path]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[character] 
+success_symbol = "[>](bold bright-green)"
+error_symbol = "[>](bold blink bright-red)"
