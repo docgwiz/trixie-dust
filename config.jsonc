@@ -71,21 +71,25 @@
   },
   
 	"cpu": {
-    "format": "CPU:{usage}%"
+    "format": "CPU:{usage}%",
+		"format-alt": "CPU:{load}"
   },
   
 	"memory": {
-    "format": "RAM:{}%"
+    "format": "RAM:{percentage}%",
+		"format-alt": "RAM:{used}GB",
+		"tooltip-format": "{used}GB + {avail}GB = {total}GB"
   },
   
 	"temperature": {
     "format": "{temperatureC}°C",
+    "format-alt": "{temperatureF}°F",
 		"tooltip": false
   },
   
 	"backlight": {
-    "device": "acpi_video1",
-    "format": "B {percent}%",
+//    "device": "acpi_video1",
+    "format": "B:{percent}%",
 		"tooltip": false
   },
   
@@ -106,7 +110,7 @@
 	"network": {
     // "interface": "wlp2*", 
 		// (Optional) To force the use of this interface
-    "format-wifi": "{essid} {signalStrength}%",
+    "format-wifi": "{essid}:{signalStrength}%",
     "format-ethernet": "ethernet",
     "tooltip-format": "{ipaddr}/{cidr} via {gwaddr} (gateway)",
     "format-linked": "{ifname} (No IP)",
