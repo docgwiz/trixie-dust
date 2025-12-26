@@ -1,0 +1,390 @@
+# ~/.config/sway/config
+
+# This config file began as a copy of the template config file 
+# in /etc/sway
+# Read `man 5 sway` for a complete reference.
+
+
+# QUESTION: what include files go in config.d directory?
+### include config.d files
+include /etc/sway/config.d/40-sway-background.conf
+include /etc/sway/config.d/50-systemd-user.conf
+
+###
+### OUTPUT CONFIG
+###
+include ~/.config/sway/outputs
+
+
+### ??? CONFIG ???
+### This file doesn't exist yet
+# include /etc/sway/config-vars.d/*
+
+
+###
+### BACKGROUND CONFIG
+###
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#
+# The output command is commented in Debian,
+# which drops the config file 40-sway-background.conf 
+# into /etc/sway/config.d/
+# This config file uses the Sway wallpaper files in 
+# the `sway-backgrounds` package
+
+
+###
+### WINDOW CONFIG
+###
+# Add gaps in between all application windows:
+gaps inner 4
+gaps outer 4
+
+# Configure the default border:
+default_border pixel 3
+
+###
+### INPUT CONFIG
+###
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+
+###
+### IDLE CONFIG
+###
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, 
+# then turn off your displays after another 300 seconds, 
+# and turn your screens back on when resumed. 
+# It will also lock your screen before your computer goes to sleep.
+
+###
+### AUTOSTART
+###
+exec /usr/libexec/polkit-mate-authentication-agent-1
+exec waybar
+exec mako
+
+# set disp;lay brightness
+exec brightnessctl set 30%
+
+# set keyboard backlight brightness
+exec brightnessctl --device 'smc::kbd_backlight' set 30%
+
+###
+### SET VARIABLES
+###
+# Assign Mod4 (logo/cmd key) to a string variable
+set $LogoKey Mod4
+
+# Ássign Mod1 (alt/option key) to a string variable
+set $AltKey Mod1
+
+# Home row direction keys a la cult-of-vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Set terminal emulator
+set $term foot
+
+# Set file manager
+set $filemngr thunar
+
+# Set application launcher
+set $menu wmenu-run
+  # replace with wofi
+
+# Set browser
+set $browser firefox-esr
+
+# Set password manager
+set $pwdmngr 1password
+
+# Set note manager
+set $notemngr obsidian
+set $notemngrPATH "~/AppImages/Obsidian.AppImage"
+
+
+###
+### KEYBINDS: launch and close apps
+###
+# This config scheme uses: 
+# the logo/cmd key for launching apps
+# the alt/option key for "dangerous" actions like kill or reload
+# the alt/option + Shift for utility functions and apps
+#
+
+###
+### KEYBINDS: close windows / close sway
+###
+
+    # EXIT sway (logs you out of your Wayland session)
+    bindsym $AltKey+q exit
+    # bindsym $mod+m exec swaynag -t warning -m 'Exit sway? (This will end your Wayland session.) ' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # KILL focused window
+    bindsym $AltKey+w kill
+
+    # RELOAD Sway configuration file
+		bindsym $AltKey+c reload
+
+		# RESTART Waybar
+		bindsym $AltKey+Shift+c exec "pkill waybar && waybar"
+
+
+
+###
+### KEYBINDS: launch/start apps
+###
+
+    # Start  terminal
+    bindsym $LogoKey+Return exec $term
+		bindsym $LogoKey+t exec $term
+
+    # Start file manager
+    bindsym $LogoKey+f exec $filemngr
+
+    # Start launcher
+    bindsym $LogoKey+space exec $menu
+
+    # Start browser
+    bindsym $LogoKey+b exec $browser
+
+    # Start password manager
+    bindsym $LogoKey+p exec $pwdmngr
+
+		# launch Obsidian AppImage with variable that specifies image location (see above)
+    bindsym $LogoKey+o exec $notemngrPATH
+
+		# launch Obsidian AppImage via script file in /usr/local/bin)
+    bindsym $LogoKey+Shift+o exec obsidian.sh
+
+
+###
+### KEYBINDS: switch focus
+###
+    # Move your focus around with cult-of-vim shortcuts
+    bindsym $AltKey+$left focus left
+    bindsym $AltKey+$down focus down
+    bindsym $AltKey+$up focus up
+    bindsym $AltKey+$right focus right 
+
+    # Or use $mod+[up|down|left|right]
+    bindsym $AltKey+Left focus left
+    bindsym $AltKey+Down focus down
+    bindsym $AltKey+Up focus up
+    bindsym $AltKey+Right focus right
+
+    # move to prev/next workspace with $super/alt/option key shortcuts
+		bindsym $LogoKey+$left workspace prev_on_output
+		bindsym $LogoKey+$right workspace next_on_output
+		bindsym $LogoKey+Left workspace prev_on_output
+		bindsym $LogoKey+Right workspace next_on_output
+		bindsym $LogoKey+$up workspace prev_on_output
+		bindsym $LogoKey+$down workspace next_on_output
+		bindsym $LogoKey+Up workspace prev_on_output
+		bindsym $LogoKey+Down workspace next_on_output
+
+    # Switch to workspace
+    bindsym $LogoKey+1 workspace number 1
+    bindsym $LogoKey+2 workspace number 2
+    bindsym $LogoKey+3 workspace number 3
+    bindsym $LogoKey+4 workspace number 4
+    bindsym $LogoKey+5 workspace number 5
+    bindsym $LogoKey+6 workspace number 6
+    bindsym $LogoKey+7 workspace number 7
+    bindsym $LogoKey+8 workspace number 8
+    bindsym $LogoKey+9 workspace number 9
+    bindsym $LogoKey+0 workspace number 10
+
+###
+### KEYBINDS: assign containers to workspaces
+###
+    bindsym $LogoKey+Shift+1 move container to workspace number 1
+    bindsym $LogoKey+Shift+2 move container to workspace number 2
+    bindsym $LogoKey+Shift+3 move container to workspace number 3
+    bindsym $LogoKey+Shift+4 move container to workspace number 4
+    bindsym $LogoKey+Shift+5 move container to workspace number 5
+    bindsym $LogoKey+Shift+6 move container to workspace number 6
+    bindsym $LogoKey+Shift+7 move container to workspace number 7
+    bindsym $LogoKey+Shift+8 move container to workspace number 8
+    bindsym $LogoKey+Shift+9 move container to workspace number 9
+    bindsym $LogoKey+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+###
+### KEYBINDS: layout and focus:
+### 
+		# next new container BESIDE existing container (y-axis split)
+    bindsym $AltKey+y split horizontal 
+
+		# next new container BELOW existing container (x-axis split)
+    bindsym $AltKey+x split vertical
+
+		# toggle between horizontal and vertical split
+    # also used to return to split layout mode
+    bindsym $AltKey+slash layout toggle split
+
+    # Switch the layout mode to stacking layout mode
+    bindsym $AltKey+s layout stacking 
+
+    # Switch the layout mode to tabbed layout mode
+    bindsym $AltKey+t layout tabbed
+
+    # Toggle the current focus between fullscreen and tiling mode
+    bindsym $AltKey+Return fullscreen toggle
+
+    # Toggle the current focus between floating and tiling mode
+    bindsym $AltKey+space floating toggle
+
+    # Moves focus between the floating and tiled areas
+    bindsym $AltKey+Shift+space focus mode_toggle
+
+    # Move focus to the parent container
+		# All workspaces, splits, tabbed/stacked groups, and windows
+		# are containers within a hierarchical tree structure.
+		# The container directly above the current container in the tree
+		# is the parent container 
+    bindsym $AltKey+p focus parent
+
+
+###
+### SCRATCHPAD
+###
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $AltKey+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $AltKey+minus scratchpad show
+
+
+###
+### KEYBINDS: drag container with mouse
+###
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $LogoKey normal
+
+###
+### KEYBINDS: resize containers
+###
+bindsym $AltKey+r mode "resize"
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+###
+### KEYBINDS: control utilities
+###
+    # Special keys to adjust volume via PulseAudio
+    # NOTE: RootBear is using PipeWire PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5-%
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
+
+    bindsym --locked XF86KbdBrightnessDown exec brightnessctl --device 'smc::kbd_backlight' set 5-%
+    bindsym --locked XF86KbdBrightnessUp exec brightnessctl --device 'smc::kbd_backlight' set +5%
+
+
+    # Special key to take a screenshot with grim
+    bindsym Print exec grim
+
+
+###
+### WINDOW COLORS
+###
+# set primary gruvbox colorscheme colors
+# see https://github.com/morhetz/gruvbox-contrib/blob/master/color.table
+
+set $bg #282828
+set $bg_2 #504945
+set $fg #ebdbb2
+set $fg_1 #FBF1C7
+set $fg_2 #D5C4A1
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $blue_faded #076678
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+# my additions
+set $medgray #363636
+
+
+# https://thomashunter.name/i3-configurator/
+
+# class                 border  bground text    indicator child_border
+
+client.focused          $yellow $yellow $fg     $yellow   $yellow
+# the window that has focus
+
+client.focused_inactive $bg_2   #5F676A $fg     #484E50   #5F676A
+# the most-recently focused window within container which is not focused
+
+client.unfocused        $bg_2   #282828 #888888 #292D2E   #222222
+# a window that does not have focus
+
+client.urgent           #2F343A #CC241D $fg_1   #CC241D   #CC241D
+# a window with an urgeny hit--only works for xwayland windows
+
+client.placeholder      #1D2021 #0C0C0C $fg     #000000   #0C0C0C
+# ignored (present for i3 compatibilty)
+
+
+###
+### STATUS BAR
+###
+# Now using waybar
+#include ~/.config/sway/bar.conf
+
+
