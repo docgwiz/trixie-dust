@@ -3,7 +3,7 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = """\n$hostname$localip\n$username\n\n$directory$character"""
+format = """\n\n$hostname\n$localip\n$username\n$directory$character"""
 # format = "$all"
 
 # Inserts a blank line between shell prompts
@@ -24,13 +24,13 @@ disabled = false
 [username]
 show_always = true
 style_user = "fg:#ffffff bg:#6395ee" # bg cornflower blue
-format = "[ \\$ $user ]($style)"
+format = "[ $user\\$ ]($style)"
 disabled = false
 
 [directory]
 style = "bold bright-green"
 format = "[ $path]($style)"
-truncation_length = 3
+truncation_length = 4
 truncation_symbol = "…/"
 
 [character] 

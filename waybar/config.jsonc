@@ -131,6 +131,7 @@
 		"menu": "on-click",
 		"menu-file": "$HOME/.config/waybar/power_menu.xml", 
 		"menu-actions": {
+			"exitSway": "swaymsg exit",			
 			"shutdown": "systemctl poweroff",
 			"reboot": "systemctl reboot"
 			// "suspend": "systemctl suspend",

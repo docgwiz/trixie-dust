@@ -15,10 +15,10 @@ default-timeout=5000
 # markup=1
 
 # Set text color for notifications
-text-color=#66FF99
+text-color=#ffffff
 
 # Set background color for notifications
-background-color=#333333
+background-color=#660000
 
 # Set width and height of notification popups
 width=300
