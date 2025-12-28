@@ -89,7 +89,7 @@
   
 	"backlight": {
 //    "device": "acpi_video1",
-    "format": "B:{percent}%",
+    "format": "Brite:{percent}%",
 		"tooltip": false
   },
   
@@ -119,8 +119,8 @@
   },
   
 	"pulseaudio": {
-    "format": "V:{volume}%",
-    "format-muted": "V:off",
+    "format": "Vol:{volume}%",
+    "format-muted": "Vol:off",
  //   "format-source": "{format_source}",
 		"on-click": "pauvcontrol"
 	},
