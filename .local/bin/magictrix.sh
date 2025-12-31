@@ -61,7 +61,7 @@ trap 'handle_error' ERR
 # (like --exclude '...').
 
 # Array for rsync options
-rsync_opts=(--dry-run --archive --update --delete --verbose --progress --human-readable)
+rsync_opts=(--archive --update --delete --verbose --progress --human-readable)
 
 # Array for rsync options + mkpath (used for rsyncing to ~/Backups)
 rsync_opts_bku=(--archive --verbose --progress --human-readable --mkpath)
@@ -88,48 +88,54 @@ rsync_list[8]=".bash_aliases"
 rsync_list[9]=".gitconfig"
 rsync_list[10]=".local/bin/"
 
+confirm_go () {
+	read -p "Do you want to proceed? (Y/n) " doublecheck 
+	# Default answer is YES; must press "N" or "n", or script aborts
+	if [[ $doublecheck == "n" || $doublecheck == "N" ]]; then
+		echo -e "\nAborted.\n"
+		exit 0
+	fi
+}
 
-###
-### BACKUP LOCAL TRIXIE SETUP (USING RSYNC)
-###
+echo -e "\nRsync (B)ackup of local\nRsync (L)ocal to git repo\nRsync (G)it repo to local"
 
-echo -e "\nBacking up local Trixie setup to ~/Backups ...\n"
+read rsync_choice
 
-echo -e "Backup OPTIONS: ${rsync_opts_bku[@]}\n"
+case $rsync_choice in 
+	"B" | "b")
+	# Rsync local Trixie setup to Backup folder
+		src_path=$local_path
+		dst_path=$backup_path
+		opts=("${rsync_opts_bku[@]}")
+		;;
+	"L" | "l")
+	# Rsync local Trixie setup to git repo
+		src_path=$local_path
+		dst_path=$repo_path
+		opts=("${rsync_opts[@]}")
+		;;
+	"G" | "g")
+		# Rsync git repo to local Trixie setup
+		src_path=$repo_path
+		dst_path=$local_path
+		opts=("${rsync_opts[@]}")
+		echo -e "\nWARNING! You are about to overwrite your local Trixie setup.\n"
+		confirm_go
+		;;
+	*)
+		echo -e "\nInvalid option. Aborting ..."
+		exit 1
+		;;
+esac
+
+echo -e "\nRsyncing $src_path to $dst_path ...\n"
+echo -e "Rsync OPTIONS: ${opts[@]}\n"
+
+confirm_go
 
 for rsync_item in "${rsync_list[@]}"; do
-	echo -e "Backing up $local_path$rsync_item to $backup_path$rsync_item\n"
-	rsync "${rsync_opts_bku[@]}" "$local_path$rsync_item" "$backup_path$rsync_item"
+	echo -e "Rsyncing $src_path$rsync_item to $dst_path$rsync_item\n"
+	rsync "${opts[@]}" "$src_path$rsync_item" "$dst_path$rsync_item"
 done
 
-echo -e "\nTrixie backup complete."
-
-
-###
-### RSYNC LOCAL TRIXIE SETUP TO GIT REPO
-###
-
-echo -e "\nRsyncing files from local Trixie setup to trixiedust repo ...\n"
-
-echo -e "Rsync OPTIONS: ${rsync_opts[@]}\n"
-
-for rsync_item in "${rsync_list[@]}"; do
-	echo -e "Rsyncing $local_path$rsync_item to $repo_path$rsync_item\n"
-	rsync "${rsync_opts_bku[@]}" "$local_path$rsync_item" "$repo_path$rsync_item"
-done
-
-echo -e "\nTrixie rsync complete."
-
-
-###
-### RSYNC GIT REPO TO LOCAL TRIXIE SETUP
-###
-
-#echo -e "\nRsyncing files from trixiedust repo to local Trixie setup ...\n"
-
-#for trix_item in "${trix_array[@]}"; do
-#	rsync --dry-run --archive --verbose --update --delete --progress --human-readable "/home/docgwiz/gitrepos/trixiedust/$trix_item/" "/home/docgwiz/.config/$trix_item/"
-# done
-
-#echo -e "\nRsync complete."
-
+echo -e "\nRsync complete."
