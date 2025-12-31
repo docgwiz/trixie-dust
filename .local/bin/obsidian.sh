@@ -1,3 +1,5 @@
 #!/bin/bash
-# /usr/local/bin/obsidian.sh
+
+# ~/.local/obsidian.sh
+
 ~/AppImages/Obsidian.AppImage

@@ -1,4 +1,4 @@
-# ~/.config/starship.toml
+# ~/.config/starship/starship.toml
 
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
@@ -30,7 +30,7 @@ disabled = false
 [directory]
 style = "bold bright-green"
 format = "[ $path]($style)"
-truncation_length = 5
+truncation_length = 4
 truncation_symbol = "…/"
 
 [character] 

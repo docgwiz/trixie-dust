@@ -114,5 +114,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Set location of Starship config file
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
 # Configure bash to initialize Starship custom prompt
 eval "$(starship init bash)"

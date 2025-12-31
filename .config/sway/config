@@ -62,11 +62,11 @@ default_border pixel 3
 ###
 ### IDLE CONFIG
 ###
-exec swayidle -w \
-	timeout 300 'swaylock --daemonize --color 000000' \
-	timeout 600 'swaymsg "output * power off"' \
-	resume 'swaymsg "output * power on"' \
-	before-sleep 'swaylock --daemonize --color 000000'
+# exec swayidle -w \
+#	timeout 300 'swaylock --daemonize --color 000000' \
+#	timeout 600 'swaymsg "output * power off"' \
+#	resume 'swaymsg "output * power on"' \
+#	before-sleep 'swaylock --daemonize --color 000000'
 
 #	timeout 300 'swaylock -i -c 000000' \
 
@@ -175,7 +175,7 @@ set $notemngrPATH "~/AppImages/Obsidian.AppImage"
 		# launch Obsidian AppImage with variable that specifies image location (see above)
     bindsym $LogoKey+o exec $notemngrPATH
 
-		# launch Obsidian AppImage via script file in /usr/local/bin)
+		# launch Obsidian AppImage via script file in ~/.local/bin)
     bindsym $LogoKey+Shift+o exec obsidian.sh
 
 

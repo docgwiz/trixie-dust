@@ -1,0 +1,118 @@
+" ~/.config/vim/vimrc
+"
+" !!!!! NOTE !!!!!
+" When editing files with sudo vim, vim runs as root and will 
+" look for a root's ~/.vimrc (/root/.vimrc), not the  user's.  
+" If it doesn't find a root user config file, vim will use
+" DEFAULT SETTINGS.
+"
+" Use sudoedit to launch the default editor (e.g., nano or vim)
+" running under your unprivileged (regular) user ID, which allows 
+" you to use your personal editor configurations and plugins.
+"
+" !!!!! NOTE !!!!!
+" A configuration file is sourced at bottom of this file (EOF).
+" The configuration does not exist on RootBear, but may exist
+" on other installations. CONSIDER REMOVING LINES AT EOF.
+"
+" $VIMRUNTIME refers to the versioned system directory
+" where Vim stores its system runtime files: 
+" /usr/share/vim/vim<version>.
+"
+" Vim will load $VIMRUNTIME/defaults.vim if the user 
+" does not have a vimrc.
+"
+" This happens after /etc/vim/vimrc(.local) are loaded, 
+" so it will override any settings in these files.
+"
+" If you don't want that to happen, uncomment the 
+" below line to prevent defaults.vim from being loaded.
+" let g:skip_defaults_vim = 1
+"
+" If you would rather use default.vim's settings, 
+" but have the system or user vimrc override its settings, 
+" then uncomment both lines below (to load the settings now 
+" but prevent it from being loaded by the user's vimrc).
+" source $VIMRUNTIME/defaults.vim
+" let g:skip_defaults_vim = 1
+"
+" Debian-specific settings are defined in $VIMRUNTIME/debian.vim 
+" and sourced by the call to :runtime (see below).
+" NOTE: Debian-specific settings no longer need to be set this way.
+"
+" If you wish to change any of those settings, do it in this file 
+" or /etc/vim/vimrc.local, since debian.vim will be overwritten 
+" everytime an upgrade of the vim packages is performed. 
+" It is recommended to make changes after sourcing debian.vim 
+" so your settings take precedence.
+"runtime! debian.vim
+"
+" Setting 'compatible' changes numerous options, 
+" so any other options should be set AFTER changing 'compatible'.
+" The command tocenable Vi compatibility mode in Vim is :set compatible.
+" This mode makes Vim emulate the behavior of the original, more basic 
+" Vi editor, which disables many of Vim's enhanced features like 
+" multi-level undo, syntax highlighting, and modern plugin support
+" set compatible
+" NOTE: debian.vim sets 'nocompatible'.  
+"
+" Vim5 and later versions support syntax highlighting. 
+" Uncommenting the next line enables syntax highlighting by default.
+syntax on
+"
+" If using a dark background within the editing area 
+" and syntax highlighting turn on this option as well
+set background=dark
+"
+" Use line numbers
+set number
+"
+" Set columns for line number
+set numberwidth=4
+"
+" Set tab width
+set tabstop=2
+"
+" Set soft tab width
+set softtabstop=2
+"
+" Enable syntax highlighting
+:syntax enable
+"
+" Set colorscheme
+:colorscheme sorbet
+" Scroll through available colorscheme options by typing
+" :colorscheme + Space + Tab
+
+"----------------------   Keymaps  --------------------------
+"
+"
+
+"----------------------            --------------------------
+"
+"
+" Uncomment the following to have Vim jump to the 
+" last position when reopening a file
+"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Uncomment the following to have Vim load indentation 
+" rules and plugins according to the detected filetype.
+"filetype plugin indent on
+
+" The following are commented out as they cause vim 
+" to behave a lotcdifferently from regular Vi. 
+" They are highly recommended though.
+"set showcmd		" Show (partial) command in status line.
+set showmatch		" Show matching brackets.
+set ignorecase		" Do case insensitive matching
+"set smartcase		" Do smart case matching
+"set incsearch		" Incremental search
+"set autowrite		" Automatically save before commands like :next and :make
+"set hidden		" Hide buffers when they are abandoned
+"set mouse=a		" Enable mouse usage (all modes)
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
