@@ -8,16 +8,16 @@
 # output eDP-1 scale 2
 
 ### output config for screen on iMac-9-1
-# output LVDS-1 mode 1920x1200@60.241Hz 
+# output LVDS-1 mode 1920x1200@60.241Hz
 # output LVDS-1 scale 1
 
 ### output config for monitors on Geekom or Trigkey 
 # with LG 24" monitor or Viewsonic 27" monitor
 # NOTE: Trigkey has two HDMI outputs
 output HDMI-A-1 mode 1920x1080@60.000HZ
-# output HDMI-A-1 mode scale 1
+output HDMI-A-1 scale 1
 # output HDMI-A-2 mode 1920x1080@60.000HZ
-# output HDMI-A-2 mode scale 1
+# output HDMI-A-2 scale 1
 
 
 # set background color
