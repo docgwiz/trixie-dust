@@ -1,69 +1,8 @@
 # ~/.config/sway/config
 
-# This config file began as a copy of the template config file 
-# in /etc/sway
+# This config file began as a copy of the 
+# template config file in /etc/sway
 # Read `man 5 sway` for a complete reference.
-
-
-### -----------------
-### CONFIGURE OUTPUTS
-### -----------------
-# run swaymsg -t get_outputs for output deets
-# consider using kanshi to handle different outputs
-
-### output config for screen on MacBookPro-10-1
-output eDP-1 mode 2880x1800@59.990Hz 
-output eDP-1 scale 2
-
-### output config for screen on iMac-9-1
-# output LVDS-1 mode 1920x1200@60.241Hz
-# output LVDS-1 scale 1
-
-### output config for monitors on Geekom or Trigkey 
-# with LG 24" monitor or Viewsonic 27" monitor
-# NOTE: Trigkey has two HDMI outputs
-# output HDMI-A-1 mode 1920x1080@60.000HZ
-# output HDMI-A-1 scale 1
-# output HDMI-A-2 mode 1920x1080@60.000HZ
-# output HDMI-A-2 scale 1
-
-
-# set background color
-output * bg #79baec solid_color
-
-### shades of blue
-# https://www.pinterest.com/pin/75-shades-of-blue-blue-hex-codes-color-names-included--75153887526405408/
-
-#151b54 night blue
-#0000ff blue
-#1e90ff dodger blue
-#82caff day sky blue
-#0041c2 blueberry blue
-#4169e1 royal blue
-#6495ed cornflower blue
-#98afc7 blue gray
-#2b547e blue jay
-#4863a0 azure blue
-#728fce light purple blue
-#737ca1 slate blue gray
-#4682b4 steel blue
-#79baec denim blue
-#87afc7 columbia blue
-#95b9c7 baby blue
-#123456 deep sea blue
-#29465b dark blue gray
-#36454f charcoal blue
-#566d7e marble blue
-
-
-### --------------------
-### CONFIGURE BACKGROUND
-### --------------------
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# The above utput command is commented in Debian, which drops 
-# the config file 40-sway-background.conf, which uses the 
-# Sway wallpaper files in the sway-backgrounds package
 
 
 ### --------------------
@@ -73,7 +12,12 @@ output * bg #79baec solid_color
 # Distros use /etc/sway/config.d/ or /usr/share/sway/config.d/
 # Tip: use *.conf to include all files ending in .conf
 # e.g., include /etc/sway/config/*.conf
+
+# puts Sway wallpaper on output background (replaced below)
 include /etc/sway/config.d/40-sway-background.conf
+
+# imports variables into the user's system environment
+# based on instructions in the Sway wiki
 include /etc/sway/config.d/50-systemd-user.conf
 
 
@@ -84,65 +28,6 @@ include /etc/sway/config.d/50-systemd-user.conf
 # user-specific directory like ~/.config/sway/config.d/
 # Tip: use *.conf to include all files ending in .conf
 # e.g., include ~/.config/sway/config.d/*.conf
-
-
-### -----------------
-### CONFIGURE WINDOWS
-### -----------------
-# Add gaps in between all application windows:
-gaps inner 4
-gaps outer 4
-
-# Configure the default border:
-default_border pixel 3
-
-
-### ----------------
-### CONFIGURE INPUTS
-### ----------------
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running
-# "swaymsg -t get_inputs"
-# Read `man 5 sway-input` for more information about this section.
-
-
-### ---------------------
-### CONFIGURE IDLE & LOCK
-### ---------------------
-# exec swayidle -w \
-#	timeout 300 'swaylock --daemonize --color 000000' \
-#	timeout 600 'swaymsg "output * power off"' \
-#	resume 'swaymsg "output * power on"' \
-#	before-sleep 'swaylock --daemonize --color 000000'
-
-#	timeout 300 'swaylock -i -c 000000' \
-
-# This will lock your screen after 300 seconds of inactivity, 
-# then turn off your displays after another 300 seconds, 
-# and turn your screens back on when resumed. 
-# It will also lock your screen before your computer goes to sleep.
-
-
-### ---------
-### AUTOSTART
-### ---------
-exec /usr/libexec/polkit-mate-authentication-agent-1
-exec waybar
-exec mako
-
-# set disp;lay brightness
-exec brightnessctl set 30%
-
-# set keyboard backlight brightness
-exec brightnessctl --device 'smc::kbd_backlight' set 30%
 
 
 ### -------------------
@@ -180,6 +65,176 @@ set $pwdmngr 1password
 # Set note manager
 set $notemngr obsidian
 set $notemngrPATH "~/AppImages/Obsidian.AppImage"
+
+### Set shades of blue
+# https://www.pinterest.com/pin/75-shades-of-blue-blue-hex-codes-color-names-included--75153887526405408/
+
+set $NightBlue #151b54
+set $CornflowerBlue #6495ed
+set $DenimBlue #79baec 
+#151b54 night blue
+#0000ff blue
+#1e90ff dodger blue
+#82caff day sky blue
+#0041c2 blueberry blue
+#4169e1 royal blue
+#6495ed cornflower blue
+#98afc7 blue gray
+#2b547e blue jay
+#4863a0 azure blue
+#728fce light purple blue
+#737ca1 slate blue gray
+#4682b4 steel blue
+#79baec denim blue
+#87afc7 columbia blue
+#95b9c7 baby blue
+#123456 deep sea blue
+#29465b dark blue gray
+#36454f charcoal blue
+#566d7e marble blue
+
+
+### --------------------
+### CONFIGURE BACKGROUND
+### --------------------
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#
+# The above output command is commented in Debian, which drops 
+# the config file 40-sway-background.conf, which uses the 
+# Sway wallpaper files in the sway-backgrounds package
+
+
+### -----------------
+### CONFIGURE OUTPUTS
+### -----------------
+# run swaymsg -t get_outputs for output deets
+# consider using kanshi to handle different outputs
+
+### output config for screen on MacBookPro-10-1
+output eDP-1 mode 2880x1800@59.990Hz 
+output eDP-1 scale 2
+
+### output config for screen on iMac-9-1
+# output LVDS-1 mode 1920x1200@60.241Hz
+# output LVDS-1 scale 1
+
+### output config for monitors on Geekom or Trigkey 
+# with LG 24" monitor or Viewsonic 27" monitor
+# NOTE: Trigkey has two HDMI outputs
+# output HDMI-A-1 mode 1920x1080@60.000HZ
+# output HDMI-A-1 scale 1
+# output HDMI-A-2 mode 1920x1080@60.000HZ
+# output HDMI-A-2 scale 1
+
+# Set background
+# output * bg #79baec solid_color
+output * bg $DenimBlue solid_color
+
+
+### -----------------
+### CONFIGURE WINDOWS
+### -----------------
+# Add gaps in between all application windows:
+gaps inner 4
+gaps outer 4
+
+# Configure the default border:
+default_border pixel 3
+
+
+### -----------------------
+### CONFIGURE WINDOW COLORS
+### -----------------------
+
+# set primary gruvbox colorscheme colors
+# see https://github.com/morhetz/gruvbox-contrib/blob/master/color.table
+
+set $bg #282828
+set $bg_2 #504945
+set $fg #ebdbb2
+set $fg_1 #FBF1C7
+set $fg_2 #D5C4A1
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $blue_faded #076678
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+# my additions
+set $medgray #363636
+
+
+# https://thomashunter.name/i3-configurator/
+
+# class                 border  bground text    indicator child_border
+
+client.focused          $yellow $yellow $fg     $yellow   $yellow
+# the window that has focus
+
+client.focused_inactive $bg_2   #5F676A $fg     #484E50   #5F676A
+# the most-recently focused window within container which is not focused
+
+client.unfocused        $bg_2   #282828 #888888 #292D2E   #222222
+# a window that does not have focus
+
+client.urgent           #2F343A #CC241D $fg_1   #CC241D   #CC241D
+# a window with an urgeny hit--only works for xwayland windows
+
+client.placeholder      #1D2021 #0C0C0C $fg     #000000   #0C0C0C
+# ignored (present for i3 compatibilty)
+
+
+### ----------------
+### CONFIGURE INPUTS
+### ----------------
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running
+# "swaymsg -t get_inputs"
+# Read `man 5 sway-input` for more information about this section.
+
+
+### ---------------------
+### CONFIGURE IDLE & LOCK
+### ---------------------
+# Daemonize swaylock by running it with the -f or --daemonize flag, 
+# especially when using it with an idle management daemon 
+# like swayidle or a systemd sleep hook. 
+# Background: the --daemonize behavior is the default for i3lock, 
+# which swaylock is designed to emulate, making it the standard 
+# way these lock programs are expected to run in the background. 
+
+# swayidle OPTIONS:
+# -w
+#		wait for command to finish executing before continuing, 
+#		helpful for ensuring that a before-sleep command has finished 
+#		before the system goes to sleep. 
+
+# swaylock OPTIONS:
+# -f, --daemonize: 
+#		detach from controlling terminal after locking.
+#		this is the default behavior of i3lock.
+# -i, --image [[<output>]:]<path>
+#		display the given image, optionally only on the given output. 
+# -c, --color <rrggbb[aa]>
+#		turn the screen into the given color instead of light gray.
+
+# exec swayidle -w \
+#	timeout 300 'swaylock --f --show-failed-attempts --color 000063' \
+#	timeout 600 'swaymsg "output * power off"' \
+#	resume 'swaymsg "output * power on"' \
+#	before-sleep 'swaylock --daemonize --color 000000' timeout 300 'swaylock -i -c 000000' \
 
 
 ### ------------------
@@ -398,54 +453,22 @@ bindsym --locked XF86KbdBrightnessUp exec brightnessctl --device 'smc::kbd_backl
 bindsym Print exec grim
 
 
-### -----------------------
-### CONFIGURE WINDOW COLORS
-### -----------------------
-
-# set primary gruvbox colorscheme colors
-# see https://github.com/morhetz/gruvbox-contrib/blob/master/color.table
-
-set $bg #282828
-set $bg_2 #504945
-set $fg #ebdbb2
-set $fg_1 #FBF1C7
-set $fg_2 #D5C4A1
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $blue_faded #076678
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
-
-# my additions
-set $medgray #363636
-
-
-# https://thomashunter.name/i3-configurator/
-
-# class                 border  bground text    indicator child_border
-
-client.focused          $yellow $yellow $fg     $yellow   $yellow
-# the window that has focus
-
-client.focused_inactive $bg_2   #5F676A $fg     #484E50   #5F676A
-# the most-recently focused window within container which is not focused
-
-client.unfocused        $bg_2   #282828 #888888 #292D2E   #222222
-# a window that does not have focus
-
-client.urgent           #2F343A #CC241D $fg_1   #CC241D   #CC241D
-# a window with an urgeny hit--only works for xwayland windows
-
-client.placeholder      #1D2021 #0C0C0C $fg     #000000   #0C0C0C
-# ignored (present for i3 compatibilty)
-
-
 ### --------------------
 ### CONFIGURE STATUS BAR
 ### -------------------
 # Now using waybar
+
+
+### ---------
+### AUTOSTART
+### ---------
+exec /usr/libexec/polkit-mate-authentication-agent-1
+exec waybar
+exec mako
+
+# set disp;lay brightness
+exec brightnessctl set 30%
+
+# set keyboard backlight brightness
+exec brightnessctl --device 'smc::kbd_backlight' set 30%
 
