@@ -98,7 +98,24 @@ confirm_go () {
 	fi
 }
 
-echo -e "\nRsync (B)ackup of local\nRsync (L)ocal to git repo\nRsync (G)it repo to local"
+rsync_go () {
+	echo -e "\nrsync_go ()\n"
+}
+
+push_go () {
+	echo -e "\npush_go ()\n"
+}
+
+pull_go () {
+	echo -e "\npull_go ()\n"
+}
+
+echo -e "\nWhat would you like to do?\n"
+echo -e "Rsync (B)ackup of local setup"
+echo -e "Rsync (L)ocal setup to repo"
+echo -e "Rysnc (R)epo to local set up"
+echo -e "(1) PUSH repo to GitHub"
+echo -e "(2) PULL GitHub to repo"
 
 read rsync_choice
 
@@ -115,13 +132,21 @@ case $rsync_choice in
 		dst_path=$repo_path
 		opts=("${rsync_opts[@]}")
 		;;
-	"G" | "g")
+	"R" | "r")
 		# Rsync git repo to local Trixie setup
 		src_path=$repo_path
 		dst_path=$local_path
 		opts=("${rsync_opts[@]}")
 		echo -e "\nWARNING! You are about to overwrite your local Trixie setup.\n"
 		confirm_go
+		;;
+	"1")
+		push_go
+		exit 0
+		;;
+	"2")
+		pull_go
+		exit 0
 		;;
 	*)
 		echo -e "\nInvalid option. Aborting ..."
