@@ -30,8 +30,8 @@ disabled = false
 [directory]
 style = "bold bright-green"
 format = "[ $path]($style)"
-truncation_length = 4
-truncation_symbol = "…/"
+# truncation_length = 4
+truncation_symbol = ".../"
 
 [character] 
 success_symbol = "[:](bold blink bright-green)"
