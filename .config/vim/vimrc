@@ -9,12 +9,15 @@
 " Use sudoedit to launch the default editor (e.g., nano or vim)
 " running under your unprivileged (regular) user ID, which allows 
 " you to use your personal editor configurations and plugins.
-"
+
 " !!!!! NOTE !!!!!
-" A configuration file is sourced at bottom of this file (EOF).
-" The configuration does not exist on RootBear, but may exist
-" on other installations. CONSIDER REMOVING LINES AT EOF.
-"
+" A global configuration file is sourced below.
+" The configuration does not exist on RootBear, 
+" but may exist on other installations. 
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
 " $VIMRUNTIME refers to the versioned system directory
 " where Vim stores its system runtime files: 
 " /usr/share/vim/vim<version>.
@@ -84,13 +87,9 @@ set softtabstop=2
 " Scroll through available colorscheme options by typing
 " :colorscheme + Space + Tab
 
-"----------------------   Keymaps  --------------------------
-"
-"
+" Enable plugins
+filetype plugin on
 
-"----------------------            --------------------------
-"
-"
 " Uncomment the following to have Vim jump to the 
 " last position when reopening a file
 "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -102,17 +101,19 @@ set softtabstop=2
 " The following are commented out as they cause vim 
 " to behave a lotcdifferently from regular Vi. 
 " They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
+set showcmd			" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
-set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
+set ignorecase	" Do case insensitive matching
+"set smartcase	" Do smart case matching
+"set incsearch	" Incremental search
+"set autowrite	" Automatically save before commands like :next and :make
+"set hidden			" Hide buffers when they are abandoned
+set mouse=a			" Enable mouse usage (all modes)
 
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
+"
+"----------------------   Keymaps  --------------------------
 
+
+
+"----------------------            --------------------------
+"
