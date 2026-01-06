@@ -39,9 +39,14 @@ endif
 " source $VIMRUNTIME/defaults.vim
 " let g:skip_defaults_vim = 1
 "
+
+" ---------------
+" DEBIAN SETTINGS
+"
 " Debian-specific settings are defined in $VIMRUNTIME/debian.vim 
 " and sourced by the call to :runtime (see below).
-" NOTE: Debian-specific settings no longer need to be set this way.
+" 
+" NOTE!!! Debian-specific settings no longer need to be set this way.
 "
 " If you wish to change any of those settings, do it in this file 
 " or /etc/vim/vimrc.local, since debian.vim will be overwritten 
@@ -49,23 +54,67 @@ endif
 " It is recommended to make changes after sourcing debian.vim 
 " so your settings take precedence.
 "runtime! debian.vim
+
+
+" -------------------------
+" SET COMPATIBILITY WITH VI
 "
-" Setting 'compatible' changes numerous options, 
-" so any other options should be set AFTER changing 'compatible'.
-" The command tocenable Vi compatibility mode in Vim is :set compatible.
-" This mode makes Vim emulate the behavior of the original, more basic 
-" Vi editor, which disables many of Vim's enhanced features like 
-" multi-level undo, syntax highlighting, and modern plugin support
-" set compatible
-" NOTE: debian.vim sets 'nocompatible'.  
+" The command to enable Vi compatibility in Vim is :set compatible.
+" This mode makes Vim emulate the behavior of the original, 
+" more basic Vi editor. which disables many of Vim's enhanced 
+" features like multi-level undo, syntax highlighting, and 
+" modern plugin support
 "
-" Vim5 and later versions support syntax highlighting. 
-" Uncommenting the next line enables syntax highlighting by default.
+" NOTE!!! if enabled (above), debian.vim sets 'nocompatible'.  
+
+" NOTE!!! Setting 'compatible' changes numerous options, so other 
+" options should be set AFTER changing 'compatible'.
+
+set nocompatible
+
+" -----------
+" LET VIM FLY
+"
+" The following are commented to make vim compatible with vi.
+" They are highly recommended though.
+
+set showcmd			" Show (partial) command in status line.
+set showmatch		" Show matching brackets.
+set ignorecase	" Do case insensitive matching
+"set smartcase	" Do smart case matching
+"set incsearch	" Incremental search
+"set autowrite	" Automatically save before commands like :next and :make
+"set hidden			" Hide buffers when they are abandoned
+set mouse=a			" Enable mouse usage (all modes)
+
+
+" --------------
+" ENABLE PLUGINS
+"
+filetype plugin on
+
+" Uncomment the line below to have Vim load indentation 
+" rules and plugins according to the detected filetype.
+
+" filetype plugin indent on
+
+" ----------------------------
+" USE VIM-PLUG TO LOAD PLUGINS
+call plug#begin('~/.vim/autoload/plug.vim')
+"
+" Declare your plugins here, for example:
+Plug 'vimwiki/vimwiki'
+"
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+
+" -----------------
+" SET OTHER OPTIONS
+"
+" Enable syntax highlighting (also set below)
+" This command is requied by vimwiki?
 syntax on
-"
-" If using a dark background within the editing area 
-" and syntax highlighting turn on this option as well
-set background=dark
 "
 " Use line numbers
 set number
@@ -79,42 +128,32 @@ set tabstop=2
 " Set soft tab width
 set softtabstop=2
 "
-" Enable syntax highlighting
-:syntax enable
-"
 " Set colorscheme
 :colorscheme sorbet
 " Scroll through available colorscheme options by typing
 " :colorscheme + Space + Tab
-
-" Enable plugins
-filetype plugin on
-
-
-" Uncomment the following to have Vim jump to the 
-" last position when reopening a file
-"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" Uncomment the following to have Vim load indentation 
-" rules and plugins according to the detected filetype.
-"filetype plugin indent on
-
-" The following are commented out as they cause vim 
-" to behave a lotcdifferently from regular Vi. 
-" They are highly recommended though.
-set showcmd			" Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-set ignorecase	" Do case insensitive matching
-"set smartcase	" Do smart case matching
-"set incsearch	" Incremental search
-"set autowrite	" Automatically save before commands like :next and :make
-"set hidden			" Hide buffers when they are abandoned
-set mouse=a			" Enable mouse usage (all modes)
-
 "
+" Enable syntax highlighting
+:syntax enable
+"
+" If using a dark background within the editing area 
+" and syntax highlighting turn on this option as well
+set background=dark
+
+
+" -----------
+" OTHER STUFF
+" 
+" Uncomment the following to have Vim jump to the last 
+" position when reopening a file
+
+" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+
 "----------------------   Keymaps  --------------------------
 
 
 
 "----------------------            --------------------------
-"
+
