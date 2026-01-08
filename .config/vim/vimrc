@@ -7,13 +7,13 @@
 " anything in ~/.vim (example: vim-plug) from running
 " note: the ^= operator prepends the path specified below
 " to the runtimepath.
-" Note -- I don't have .vim at this time.
+" Note -- I don't have a ~/.vim directory at this time.
 "set runtimepath^=~/.vim
 
 
 " ----------------------------------------
 " ADJUST THE PACK PATH TO RUN VIMPACKAGES
-" Note -- I not using VimPackages; I use vim-plug
+" Note -- I'm not using VimPackages at this time; I use vim-plug
 "set packpath+=~/.vim/pack
 "set packpath+=~/.vim/pack/plugins/start
 "set packpath+=~/.vim/pack/plugins/opt
@@ -100,6 +100,25 @@ set nocompatible
 set viminfo+=n~/.config/vim/viminfo
 
 
+" --------------------------
+" SET LOCATION OF TEMP FILES
+"
+" To prevent issues when syncing, configure Vim to store its 
+" temporary swap, backup, and undo files in a non-synced directory:
+  
+" Store swap files in a hidden directory
+set directory=/tmp/vim/swap//
+
+" Store backup files in a hidden directory
+set backupdir=/tmp/vim/backup//
+
+" Enable persistent undo
+set undofile
+
+" Store undo files in a hidden directory
+set undodir=/tmp/undo//
+
+
 " -----------
 " LET VIM FLY
 "
@@ -129,10 +148,9 @@ filetype plugin on
 
 " ------------------
 " CONFIGURE VIMWIKIS
- let g:vimwiki_list = [
-    \ {'path': '~/vimtest-md/', 'syntax': 'markdown', 'ext': '.md'},
-    \ {'path': '~/vimtest-wk/', 'syntax': 'default', 'ext': '.wiki'},
-    \ {'path': '~/vimwiki/', 'syntax': 'default', 'ext': '.wiki'}
+let g:vimwiki_list = [
+	\ {'path': '~/vimwikis-sync/vimtest-md/', 'syntax': 'markdown', 'ext': '.md'},
+	\ {'path': '~/vimwikis-sync/vimtest-wk/', 'syntax': 'default', 'ext': '.wiki'}
 \ ]
 
 
