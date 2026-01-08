@@ -107,16 +107,16 @@ set viminfo+=n~/.config/vim/viminfo
 " temporary swap, backup, and undo files in a non-synced directory:
   
 " Store swap files in a hidden directory
-set directory=/tmp/vim/swap//
+set directory=~/.local/tmp/vim/swap//
 
 " Store backup files in a hidden directory
-set backupdir=/tmp/vim/backup//
+set backupdir=~/.local/tmp/vim/backup//
 
 " Enable persistent undo
 set undofile
 
 " Store undo files in a hidden directory
-set undodir=/tmp/undo//
+set undodir=~/.local/tmp/vim/undo//
 
 
 " -----------
@@ -149,8 +149,8 @@ filetype plugin on
 " ------------------
 " CONFIGURE VIMWIKIS
 let g:vimwiki_list = [
-	\ {'path': '~/vimwikis-sync/vimtest-md/', 'syntax': 'markdown', 'ext': '.md'},
-	\ {'path': '~/vimwikis-sync/vimtest-wk/', 'syntax': 'default', 'ext': '.wiki'}
+	\ {'path': '~/syncthing/vimwikis/vimtest-md/', 'syntax': 'markdown', 'ext': '.md'},
+	\ {'path': '~/syncthing/vimwikis/vimtest-wk/', 'syntax': 'default', 'ext': '.wiki'}
 \ ]
 
 
